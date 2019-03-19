@@ -1,15 +1,15 @@
 import datetime
 
-from candidate import Candidate
-from project import Project
-from datagenerator import DataGenerator
+from entity.Candidate import Candidate
+from entity.Project import Project
+from data.datagenerator import DataGenerator
 
 class DataProviderService:
 
 	def __init__(self, nr_of_items):
 		self.data_generator = DataGenerator()
 		self.CANDIDATES = self.data_generator.generate_candidates(nr_of_items)
-
+		
 	def get_candidates(self):
 		return self.CANDIDATES
 

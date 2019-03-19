@@ -1,9 +1,9 @@
 import random
 import datetime
 
-from candidate import Candidate
-from project import Project
-from experience import Experience
+from entity.Candidate import Candidate
+from entity.Project import Project
+from entity.Experience import Experience
 
 class DataGenerator:
 
@@ -22,7 +22,7 @@ class DataGenerator:
 	def __init__(self):
 		pass
 
-	def generate_candidates(self, nr):
+	def generate_candidates(self, nr):		
 		rnd_fn = self.generate_first_names(nr)
 		rnd_ln = self.generate_last_names(nr)
 		result = []
