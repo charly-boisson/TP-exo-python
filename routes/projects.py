@@ -5,5 +5,10 @@ generate_candidats = candidatServices(5)
 
 def get_projects():
     candidats = generate_candidats.get_candidates()
-    print(candidats)
-    return jsonify(candidats)
+    projects = []
+    for candidat in candidats:
+        experiences = candidat['experience']
+        for experience in experiences:
+            projects.append(experience['projects'])
+
+    return jsonify(projects)
