@@ -1,7 +1,8 @@
 from flask import Flask, jsonify
 import random
-import candidat_fixtures
-
+import routes.candidats as routesCandidats
+import routes.projects as routesProjects
+import routes.experiences as routesExperiences
 
 app = Flask(__name__)
 
@@ -22,18 +23,32 @@ def index():
 	selected_quote = quotes[random.randint(0, nr_of_quotes - 1)]
 	return jsonify(selected_quote)
 
-@app.route("/candidats")
+# Requetes Candidats
+@app.route("/api/candidats",methods=["GET"])
 def get_candidats():
+	return routesCandidats.get_candidats()
 
-	candidats = candidat_fixtures.get_candidats()
-	nr_of_candidats = len(candidats)
-	selected_candidat = candidats[random.randint(0, nr_of_candidats - 1)]
-	return jsonify(selected_candidat)
+@app.route("/api/candidat/<string:id>",methods=["GET"])
+def get_candidat(id):
+	return routesCandidats.get_candidat(id)
 
-@app.route("/api/candidat/<string:id>", methods=["GET"])
-def candidate_by_id(id):
-	candidat = candidat_fixtures.get_candidat(id)
-	return jsonify(candidat)
+@app.route("/api/candidat/delete/<string:id>",methods=["GET"])
+def delete_candidat(id):
+	return routesCandidats.delete_candidat(id)
+
+# Requetes Projects
+@app.route("/api/projects",methods=["GET"])
+def get_project():
+	return routesProjects.get_projects()
+
+# Requetes Experiences
+@app.route("/api/experiences",methods=["GET"])
+def get_experiences():
+	return routesExperiences.get_experiences()
+
+# app.add_url_rule('/api/candidats', 'candidats', routesCandidats.get_candidats())
+# app.add_url_rule('/api/candidats/<string:id>', '<string:id>', get_candidats)
+
 
 if __name__ == "__main__":
 	app.run(debug=True)
