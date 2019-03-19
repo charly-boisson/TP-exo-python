@@ -1,4 +1,24 @@
+from flask import Flask, jsonify, abort, make_response
+from services.data_provider_service import DataProviderService as candidatServices
 
-def candidate_by_id(id):
-	candidat = candidat_fixtures.get_candidat(id)
-	return jsonify(candidat)
+generate_candidats = candidatServices(5)
+print(generate_candidats.get_candidates())
+
+def get_candidats():
+	candidats = generate_candidats.get_candidates()
+	return jsonify(candidats)
+
+def get_candidat(id):
+	candidat = generate_candidats.get_candidate(id)
+	if candidat:
+		return jsonify(candidat)
+	else:
+		return abort(404)
+
+def delete_candidat(id):
+	deletecandidat = generate_candidats.delete_candidate(id)
+	if deletecandidat:
+		resp = { "message": "Candidat supprimé !" }
+		return make_response(jsonify(resp), 200)
+	else:
+		return abort(404)
