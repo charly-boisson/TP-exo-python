@@ -5,9 +5,9 @@ class Experience:
         self.years = years
         self.projects = projects
 
-    def serialize:
+    def serialize(self):
         return {
-            'domain': self.domain,
-            'years': self.years,
-            'projects': self.projects,
+            "domain": self.domain,
+            "years": self.years,
+            "projects": [prj.serialize() for prj in self.projects]
         }
