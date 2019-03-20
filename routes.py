@@ -4,6 +4,7 @@ import middlewares.website as website
 def get_routes_api(app):
     app.add_url_rule('/api/candidates', 'candidates', api.get_candidates, methods=['GET'])
     app.add_url_rule('/api/candidates/<string:id>', '<string:id>', api.get_candidat, methods=['GET'])
+    # app.add_url_rule('/api/candidates/<string:id>', 'id', api.delete_candidat, methods=['DELETE'])
     app.add_url_rule('/api/experiences', 'experiences', api.get_experiences, methods=['GET'])
     app.add_url_rule('/api/projects', 'projects', api.get_projects, methods=['GET'])
 
