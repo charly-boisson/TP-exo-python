@@ -1,6 +1,6 @@
 import uuid
 
-class Candidate:
+class Candidate():
 
     def __init__(self, first_name, last_name, experience):
         self.id = str(uuid.uuid1())
