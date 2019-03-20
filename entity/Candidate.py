@@ -3,7 +3,7 @@ import uuid
 class Candidate:
 
     def __init__(self, first_name, last_name, experience):
-        self.id = str(uuid.uuid4())
+        self.id = str(uuid.uuid1())
         self.first_name = first_name
         self.last_name = last_name
         self.experience = experience
