@@ -1,4 +1,5 @@
 from flask import render_template
+import middlewares.api as api
 
 def page_index():
 	return render_template('index.html')
@@ -9,12 +10,15 @@ def page_about():
 
 
 def page_candidate():
-	return render_template('candidate.html')
+	candidates = api.get_candidates(False)
+	return render_template('candidate.html', candidates=candidates)
 
 
 def page_experience():
-	return render_template('experience.html')
+	experiences = api.get_experiences(False)
+	return render_template('experience.html', experiences=experiences)
 
 
 def page_project():
-	return render_template('project.html')
+	projects = api.get_projects(False)
+	return render_template('project.html', projects=projects)

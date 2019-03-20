@@ -3,9 +3,12 @@ from service.CandidateService import CandidateService
 
 candidate_service = CandidateService(5)
 
-def get_candidates():
+def get_candidates(serialize=True):
     candidates = candidate_service.get_candidates()
-    return jsonify(candidates)
+    if(serialize):
+        return jsonify(candidates)
+    else:
+        return candidates
 
 def get_candidat(id):
 	candidat = candidate_service.get_candidate(id)
@@ -22,15 +25,18 @@ def delete_candidat(id):
 	else:
 		return abort(404)
 
-def get_experiences():
+def get_experiences(serialize=True):
     candidats = candidate_service.get_candidates()
     experiences = []
     for candidat in candidats:
         experiences.append(candidat['experience'])
 
-    return jsonify(experiences)
+    if(serialize):
+        return jsonify(candidates)
+    else:
+        return candidates
 
-def get_projects():
+def get_projects(serialize=True):
     candidats = candidate_service.get_candidates()
     projects = []
     for candidat in candidats:
@@ -38,4 +44,7 @@ def get_projects():
         for experience in experiences:
             projects.append(experience['projects'])
 
-    return jsonify(projects)
+    if(serialize):
+        return jsonify(candidates)
+    else:
+        return candidates
