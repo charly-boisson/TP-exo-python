@@ -1,5 +1,7 @@
+from flask import abort
 import middlewares.api as api
 import middlewares.website as website
+import middlewares.errors as errors
 
 def get_routes_api(app):
     app.add_url_rule('/api/candidates', 'candidates', api.get_candidates, methods=['GET'])
@@ -14,3 +16,8 @@ def get_routes_template(app):
     app.add_url_rule('/candidate', 'candidate', website.page_candidate, methods=['GET'])
     app.add_url_rule('/experience', 'experience', website.page_experience, methods=['GET'])
     app.add_url_rule('/project', 'project', website.page_project, methods=['GET'])
+
+def init_error_handlers(app):
+    app.errorhandler(404)(errors.handle_error_404)
+    app.errorhandler(500)(errors.handle_error_500)
+    app.add_url_rule('/crash', 'crash', errors.crash)

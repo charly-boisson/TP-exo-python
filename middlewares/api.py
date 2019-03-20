@@ -32,9 +32,9 @@ def get_experiences(serialize=True):
         experiences.append(candidat['experience'])
 
     if(serialize):
-        return jsonify(candidates)
+        return jsonify(experiences)
     else:
-        return candidates
+        return experiences
 
 def get_projects(serialize=True):
     candidats = candidate_service.get_candidates()
@@ -45,6 +45,6 @@ def get_projects(serialize=True):
             projects.append(experience['projects'])
 
     if(serialize):
-        return jsonify(candidates)
+        return jsonify(projects)
     else:
-        return candidates
+        return projects
