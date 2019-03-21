@@ -10,3 +10,12 @@ class Client(Model):
     phone = Column(String(30), nullable=True)
     email = Column(String(200), nullable=True)
     positions = relationship("Position")
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "phone": self.phone,
+            "email": self.email,
+            "positions": [pos.serialize() for pos in self.positions],
+        }

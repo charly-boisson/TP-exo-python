@@ -11,3 +11,13 @@ class Recruiter(Model):
     phone = Column(String(30), nullable=True)
     interviews = relationship("Interview")
     positions = relationship("Position")
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "phone": self.phone,
+            "interviews": [itv.serialize() for itv in self.interviews],
+            "positions": [pos.serialize() for pos in self.positions],
+        }

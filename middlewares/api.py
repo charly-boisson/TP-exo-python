@@ -1,7 +1,10 @@
 from flask import jsonify, abort, make_response
 from service.CandidateService import CandidateService
 
-candidate_service = CandidateService(5)
+db_engine = 'sqlite:////Users/charlyboisson/Documents/MYDIGITALSCHOOL/COURS/PYTHON/tp-exo-python/db/test.db'
+DATA_PROVIDER = CandidateService(db_engine)
+
+# candidate_service = CandidateService(5)
 
 def get_candidates(serialize=True):
     candidates = candidate_service.get_candidates()
@@ -48,3 +51,14 @@ def get_projects(serialize=True):
         return jsonify(projects)
     else:
         return projects
+
+def init_database():
+    DATA_PROVIDER.init_database()
+    resp = { "message": "Instanciation BDD reussis !" }
+    return jsonify(resp)
+
+
+def fill_database():
+    DATA_PROVIDER.fill_database()
+    resp = { "message": "Creation des jeux de données de la BDD reussis !" }
+    return jsonify(resp)

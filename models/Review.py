@@ -10,3 +10,12 @@ class Review(Model):
     content = Column(String(200), nullable=True)
     reviewer = Column(String(200), nullable=True)
     candidate = Column(Integer, ForeignKey('candidates.id'))
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "review_date": self.review_date,
+            "content": self.content,
+            "reviewer": self.reviewer,
+            "candidate": self.candidate,
+        }

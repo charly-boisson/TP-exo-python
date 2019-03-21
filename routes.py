@@ -9,6 +9,8 @@ def get_routes_api(app):
     # app.add_url_rule('/api/candidates/<string:id>', 'id', api.delete_candidat, methods=['DELETE'])
     app.add_url_rule('/api/experiences', 'experiences', api.get_experiences, methods=['GET'])
     app.add_url_rule('/api/projects', 'projects', api.get_projects, methods=['GET'])
+    app.add_url_rule('/api/initdb', 'initdb', api.init_database, methods=['GET'])
+    app.add_url_rule('/api/filldb5', 'filldb5', api.fill_database, methods=['GET'])
 
 def get_routes_template(app):
     app.add_url_rule('/index', 'index', website.page_index, methods=['GET'])

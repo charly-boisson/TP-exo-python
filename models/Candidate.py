@@ -15,3 +15,17 @@ class Candidate(Model):
     skills = Column(String(1000), default="")
     interviews = relationship("Interview")
     reviews = relationship("Review")
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "email": self.email,
+            "birthday": self.birthday,
+            "phone": self.phone,
+            "languages": self.languages,
+            "skills": self.skills,
+            "interviews": [itv.serialize() for itv in self.interviews],
+            "reviews": [rev.serialize() for rev in self.reviews],
+        }
