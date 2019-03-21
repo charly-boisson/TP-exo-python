@@ -1,8 +1,8 @@
-import Candidate from Candidate
-import Client from Client
-import Interview from Interview
-import Position from Position
-import Recruiter from Recruiter
-import Review from Review
+from Candidate import Candidate
+from Client import Client
+from Interview import Interview
+from Position import Position
+from Recruiter import Recruiter
+from Review import Review
 
 __all__ = [Candidate,Client,Interview,Position,Recruiter,Review]
