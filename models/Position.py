@@ -1,4 +1,6 @@
-import Model
+from sqlalchemy import Column, String, Integer, ForeignKey, Numeric, Date
+from sqlalchemy.orm import relationship
+from Models.Model import Model
 
 class Position(Model):
 
@@ -10,4 +12,6 @@ class Position(Model):
     feedback = Column(String(200), nullable=True)
     years_of_experience = Column(Integer, nullable=True)
     salary = Column(Integer, nullable=True)
+    clients = Column(Integer, ForeignKey('clients.id'))
+    recruters = Column(Integer, ForeignKey('recruters.id'))
     interviews = relationship("Interview")

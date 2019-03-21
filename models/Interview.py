@@ -1,4 +1,6 @@
-import Model
+from sqlalchemy import Column, String, Integer, ForeignKey, Numeric, Date
+from sqlalchemy.orm import relationship
+from Models.Model import Model
 
 class Interview(Model):
 
@@ -6,6 +8,6 @@ class Interview(Model):
     id = Column(Integer, primary_key=True, nullable=False,autoincrement=True)
     date = Column(Date, nullable=True)
     feedback = Column(String(200), nullable=True)
-    position = Column(String(200), nullable=True)
-    recruiter = relationship("Recruiter")
-    candidate = relationship("Candidate")
+    position = Column(Integer, ForeignKey('positions.id'))
+    recruiter = Column(Integer, ForeignKey('recruiters.id'))
+    candidate = Column(Integer, ForeignKey('candidates.id'))

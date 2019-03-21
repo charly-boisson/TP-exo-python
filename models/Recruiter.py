@@ -1,4 +1,6 @@
-import Model
+from sqlalchemy import Column, String, Integer, ForeignKey, Numeric, Date
+from sqlalchemy.orm import relationship
+from Models.Model import Model
 
 class Recruiter(Model):
 

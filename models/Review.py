@@ -1,4 +1,6 @@
-import Model
+from sqlalchemy import Column, String, Integer, ForeignKey, Numeric, Date
+from sqlalchemy.orm import relationship
+from Models.Model import Model
 
 class Review(Model):
 
@@ -7,4 +9,4 @@ class Review(Model):
     review_date = Column(Date, nullable=True)
     content = Column(String(200), nullable=True)
     reviewer = Column(String(200), nullable=True)
-    candidate = relationship("Candidate")
+    candidate = Column(Integer, ForeignKey('candidates.id'))
