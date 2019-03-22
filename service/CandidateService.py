@@ -33,6 +33,7 @@ class CandidateService:
         """
         init_database(self.engine)
 
+    # Candidat
     def add_candidate(self, first_name, last_name, email, birthday=None, phone=None, languages="", skills=""):
         """
         Creates and saves a new candidate to the database.
@@ -84,10 +85,9 @@ class CandidateService:
     def update_candidate(self, id, new_candidate):
         updated_candidate = None
         candidate = self.get_candidate(id)[0]
-
+        print(candidate)
         if candidate:
             candidate.email = new_candidate["email"]
-            candidate.phone = new_candidate["phone"]
             candidate.first_name = new_candidate["first_name"]
             candidate.last_name = new_candidate["last_name"]
             self.session.add(candidate)
@@ -95,6 +95,57 @@ class CandidateService:
             updated_candidate = self.get_candidate(id)[0]
 
         return updated_candidate
+
+    def delete_candidate(self, id):
+        if id:
+            items_deleted = self.session.query(Candidate).filter(Candidate.id == id).delete()
+            return items_deleted > 0
+
+        return False
+
+    # Interview
+    def get_interview(self, id=None, serialize=False):
+        """
+        If the id parameter is  defined then it looks up the candidate with the given id,
+        otherwise it loads all the candidates
+
+        :param id: The id of the candidate which needs to be loaded (default value is None)
+        :return: The candidate or candidates.
+        """
+
+        all_interviews = []
+
+        if id is None:
+            all_interviews = self.session.query(Interview).order_by(Interview.date).all()
+        else:
+            all_interviews = self.session.query(Interview).filter(Interview.id == id).all()
+
+        if serialize:
+            return [cand.serialize() for cand in all_interviews]
+        else:
+            return all_interviews
+
+    # Position
+    def get_position(self, id=None, serialize=False):
+        """
+        If the id parameter is  defined then it looks up the candidate with the given id,
+        otherwise it loads all the candidates
+
+        :param id: The id of the candidate which needs to be loaded (default value is None)
+        :return: The candidate or candidates.
+        """
+
+        all_positions = []
+
+        if id is None:
+            all_positions = self.session.query(Position).order_by(Position.name).all()
+        else:
+            all_positions = self.session.query(Position).filter(Position.id == id).all()
+
+        if serialize:
+            return [cand.serialize() for cand in all_positions]
+        else:
+            return all_positions
 
     def fill_database(self):
         #

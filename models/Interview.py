@@ -18,6 +18,6 @@ class Interview(Model):
             "date": self.date,
             "feedback": self.feedback,
             "position": self.position,
-            "recruiter_id": self.recruiter,
+            "recruiter_id": self.recruiter_id,
             "candidate": self.candidate,
         }
